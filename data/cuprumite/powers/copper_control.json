@@ -1,0 +1,508 @@
+{
+    "type": "origins:multiple",
+	"name": "Copper Control",
+	"description": "Focus on a copper block and hold your primary ability key to move it forward. Sneak to pull it towards you. Press your ternary ability key to toggle copper control.",
+    "manual_actions": {
+        "type": "origins:active_self",
+        "entity_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:if_else",
+                    "condition": {
+                        "type": "origins:sneaking"
+                    },
+                    "if_action": {
+                        "type": "origins:execute_command",
+                        "command": "function cuprumite:get_rotation_inverted"
+                    },
+                    "else_action": {
+                        "type": "origins:execute_command",
+                        "command": "function cuprumite:get_rotation"
+                    }
+                },
+                {
+                    "type": "origins:change_resource",
+                    "resource": "cuprumite:energy_source_bar",
+                    "change": -1
+                },
+                {   
+                    "type": "origins:execute_command",
+                    "command": "advancement grant @s only cuprumite:renewable_energy"
+                },
+                {
+                    "type": "origins:if_else_list",
+                    "actions": [
+                        {
+                            "condition": {
+                                "type": "origins:scoreboard",
+                                "objective": "direction_x",
+                                "comparison": "==",
+                                "compare_to": 1
+                            },
+                            "action": {
+                                "type": "origins:raycast",
+                                "distance": 32,
+                                "shape_type": "outline",
+                                "entity": false,
+                                "block_action": {
+                                    "type": "origins:if_else",
+                                    "condition": {
+                                        "type": "origins:in_tag",
+                                        "tag": "cuprumite:usable_copper"
+                                    },
+                                    "if_action": {  
+                                        "type": "origins:execute_command",
+                                        "command": "function cuprumite:move_copper_z_positive"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "condition": {
+                                "type": "origins:scoreboard",
+                                "objective": "direction_x",
+                                "comparison": "==",
+                                "compare_to": 2
+                            },
+                            "action": {
+                                "type": "origins:raycast",
+                                "distance": 32,
+                                "shape_type": "outline",
+                                "entity": false,
+                                "block_action": {
+                                    "type": "origins:if_else",
+                                    "condition": {
+                                        "type": "origins:in_tag",
+                                        "tag": "cuprumite:usable_copper"
+                                    },
+                                    "if_action": {  
+                                        "type": "origins:execute_command",
+                                        "command": "function cuprumite:move_copper_x_positive"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "condition": {
+                                "type": "origins:scoreboard",
+                                "objective": "direction_x",
+                                "comparison": "==",
+                                "compare_to": 3
+                            },
+                            "action": {
+                                "type": "origins:raycast",
+                                "distance": 32,
+                                "shape_type": "outline",
+                                "entity": false,
+                                "block_action": {
+                                    "type": "origins:if_else",
+                                    "condition": {
+                                        "type": "origins:in_tag",
+                                        "tag": "cuprumite:usable_copper"
+                                    },
+                                    "if_action": {  
+                                        "type": "origins:execute_command",
+                                        "command": "function cuprumite:move_copper_x_negative"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "condition": {
+                                "type": "origins:scoreboard",
+                                "objective": "direction_x",
+                                "comparison": "==",
+                                "compare_to": 4
+                            },
+                            "action": {
+                                "type": "origins:raycast",
+                                "distance": 32,
+                                "shape_type": "outline",
+                                "entity": false,
+                                "block_action": {
+                                    "type": "origins:if_else",
+                                    "condition": {
+                                        "type": "origins:in_tag",
+                                        "tag": "cuprumite:usable_copper"
+                                    },
+                                    "if_action": {  
+                                        "type": "origins:execute_command",
+                                        "command": "function cuprumite:move_copper_z_negative"
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "origins:if_else_list",
+                    "actions": [
+                        {
+                            "condition": {
+                                "type": "origins:scoreboard",
+                                "objective": "direction_y",
+                                "comparison": "==",
+                                "compare_to": 1
+                            },
+                            "action": {
+                                "type": "origins:raycast",
+                                "distance": 32,
+                                "shape_type": "outline",
+                                "entity": false,
+                                "block_action": {
+                                    "type": "origins:if_else",
+                                    "condition": {
+                                        "type": "origins:in_tag",
+                                        "tag": "cuprumite:usable_copper"
+                                    },
+                                    "if_action": {  
+                                        "type": "origins:execute_command",
+                                        "command": "function cuprumite:move_copper_y_positive"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "condition": {
+                                "type": "origins:scoreboard",
+                                "objective": "direction_y",
+                                "comparison": "==",
+                                "compare_to": 3
+                            },
+                            "action": {
+                                "type": "origins:raycast",
+                                "distance": 32,
+                                "shape_type": "outline",
+                                "entity": false,
+                                "block_action": {
+                                    "type": "origins:if_else",
+                                    "condition": {
+                                        "type": "origins:in_tag",
+                                        "tag": "cuprumite:usable_copper"
+                                    },
+                                    "if_action": {  
+                                        "type": "origins:execute_command",
+                                        "command": "function cuprumite:move_copper_y_negative"
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "cooldown": 8,
+        "hud_render": {
+            "should_render": false
+        },
+        "key": {
+            "key": "key.origins.primary_active",
+            "continuous": true
+        },
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:raycast",
+                    "distance": 32,
+                    "shape_type": "outline",
+                    "entity": false,
+                    "block_condition": {
+                        "type": "origins:in_tag",
+                        "tag": "cuprumite:usable_copper"
+                    }
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "cuprumite:energy_source_bar",
+                    "comparison": ">",
+                    "compare_to": 0
+                },
+                {
+                    "type": "origins:gamemode",
+                    "gamemode": "spectator",
+                    "inverted": true
+                },
+                {  
+                    "type": "origins:resource",
+                    "resource": "cuprumite:copper_control_toggle_bar",
+                    "comparison": "==",
+                    "compare_to": 0
+                }
+            ]
+        }
+    },
+    "toggle_actions": {
+        "type": "origins:action_over_time",
+        "entity_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:if_else",
+                    "condition": {
+                        "type": "origins:sneaking"
+                    },
+                    "if_action": {
+                        "type": "origins:execute_command",
+                        "command": "function cuprumite:get_rotation_inverted"
+                    },
+                    "else_action": {
+                        "type": "origins:execute_command",
+                        "command": "function cuprumite:get_rotation"
+                    }
+                },
+                {
+                    "type": "origins:change_resource",
+                    "resource": "cuprumite:energy_source_bar",
+                    "change": -1
+                },
+                {   
+                    "type": "origins:execute_command",
+                    "command": "advancement grant @s only cuprumite:renewable_energy"
+                },
+                {
+                    "type": "origins:if_else_list",
+                    "actions": [
+                        {
+                            "condition": {
+                                "type": "origins:scoreboard",
+                                "objective": "direction_x",
+                                "comparison": "==",
+                                "compare_to": 1
+                            },
+                            "action": {
+                                "type": "origins:raycast",
+                                "distance": 32,
+                                "shape_type": "outline",
+                                "entity": false,
+                                "block_action": {
+                                    "type": "origins:if_else",
+                                    "condition": {
+                                        "type": "origins:in_tag",
+                                        "tag": "cuprumite:usable_copper"
+                                    },
+                                    "if_action": {  
+                                        "type": "origins:execute_command",
+                                        "command": "function cuprumite:move_copper_z_positive"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "condition": {
+                                "type": "origins:scoreboard",
+                                "objective": "direction_x",
+                                "comparison": "==",
+                                "compare_to": 2
+                            },
+                            "action": {
+                                "type": "origins:raycast",
+                                "distance": 32,
+                                "shape_type": "outline",
+                                "entity": false,
+                                "block_action": {
+                                    "type": "origins:if_else",
+                                    "condition": {
+                                        "type": "origins:in_tag",
+                                        "tag": "cuprumite:usable_copper"
+                                    },
+                                    "if_action": {  
+                                        "type": "origins:execute_command",
+                                        "command": "function cuprumite:move_copper_x_positive"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "condition": {
+                                "type": "origins:scoreboard",
+                                "objective": "direction_x",
+                                "comparison": "==",
+                                "compare_to": 3
+                            },
+                            "action": {
+                                "type": "origins:raycast",
+                                "distance": 32,
+                                "shape_type": "outline",
+                                "entity": false,
+                                "block_action": {
+                                    "type": "origins:if_else",
+                                    "condition": {
+                                        "type": "origins:in_tag",
+                                        "tag": "cuprumite:usable_copper"
+                                    },
+                                    "if_action": {  
+                                        "type": "origins:execute_command",
+                                        "command": "function cuprumite:move_copper_x_negative"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "condition": {
+                                "type": "origins:scoreboard",
+                                "objective": "direction_x",
+                                "comparison": "==",
+                                "compare_to": 4
+                            },
+                            "action": {
+                                "type": "origins:raycast",
+                                "distance": 32,
+                                "shape_type": "outline",
+                                "entity": false,
+                                "block_action": {
+                                    "type": "origins:if_else",
+                                    "condition": {
+                                        "type": "origins:in_tag",
+                                        "tag": "cuprumite:usable_copper"
+                                    },
+                                    "if_action": {  
+                                        "type": "origins:execute_command",
+                                        "command": "function cuprumite:move_copper_z_negative"
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "origins:if_else_list",
+                    "actions": [
+                        {
+                            "condition": {
+                                "type": "origins:scoreboard",
+                                "objective": "direction_y",
+                                "comparison": "==",
+                                "compare_to": 1
+                            },
+                            "action": {
+                                "type": "origins:raycast",
+                                "distance": 32,
+                                "shape_type": "outline",
+                                "entity": false,
+                                "block_action": {
+                                    "type": "origins:if_else",
+                                    "condition": {
+                                        "type": "origins:in_tag",
+                                        "tag": "cuprumite:usable_copper"
+                                    },
+                                    "if_action": {  
+                                        "type": "origins:execute_command",
+                                        "command": "function cuprumite:move_copper_y_positive"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "condition": {
+                                "type": "origins:scoreboard",
+                                "objective": "direction_y",
+                                "comparison": "==",
+                                "compare_to": 3
+                            },
+                            "action": {
+                                "type": "origins:raycast",
+                                "distance": 32,
+                                "shape_type": "outline",
+                                "entity": false,
+                                "block_action": {
+                                    "type": "origins:if_else",
+                                    "condition": {
+                                        "type": "origins:in_tag",
+                                        "tag": "cuprumite:usable_copper"
+                                    },
+                                    "if_action": {  
+                                        "type": "origins:execute_command",
+                                        "command": "function cuprumite:move_copper_y_negative"
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "interval": 8,
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:raycast",
+                    "distance": 32,
+                    "shape_type": "outline",
+                    "entity": false,
+                    "block_condition": {
+                        "type": "origins:in_tag",
+                        "tag": "cuprumite:usable_copper"
+                    }
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "cuprumite:energy_source_bar",
+                    "comparison": ">",
+                    "compare_to": 0
+                },
+                {
+                    "type": "origins:gamemode",
+                    "gamemode": "spectator",
+                    "inverted": true
+                },
+                {  
+                    "type": "origins:resource",
+                    "resource": "cuprumite:copper_control_toggle_bar",
+                    "comparison": "==",
+                    "compare_to": 1
+                }
+            ]
+        }
+    },
+    "toggle": {
+        "type": "origins:active_self",
+        "entity_action": {
+            "type": "origins:if_else",
+            "condition": {
+                "type": "origins:resource",
+                "resource": "cuprumite:copper_control_toggle_bar",
+                "comparison": "==",
+                "compare_to": 1
+            },
+            "if_action": {
+                "type": "origins:change_resource",
+                "resource": "cuprumite:copper_control_toggle_bar",
+                "change": 0,
+                "operation": "set"
+            },
+            "else_action": {
+                "type": "origins:change_resource",
+                "resource": "cuprumite:copper_control_toggle_bar",
+                "change": 1,
+                "operation": "set"
+            }
+        },
+        "cooldown": 1,
+        "key": {
+            "key": "key.origins.ternary_active"
+        },
+        "hud_render": {
+            "should_render": false
+        }
+    },
+    "toggle_bar": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 1,
+        "start_value": 0,
+        "hud_render": {
+            "should_render": false
+        },
+        "min_action": {
+            "type": "origins:execute_command",
+            "command": "title @s actionbar {\"text\":\"Copper control toggled off\",\"color\":\"white\"}"
+        },
+        "max_action": {
+            "type": "origins:execute_command",
+            "command": "title @s actionbar {\"text\":\"Copper control toggled on\",\"color\":\"white\"}"
+        }
+    }
+}

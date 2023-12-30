@@ -1,0 +1,23 @@
+{
+    "type": "origins:action_on_callback",
+    "hidden": true,
+    "entity_action_added": {
+        "type": "origins:and",
+        "actions": [
+            {
+                "type": "origins:damage",
+                "amount": 14,
+                "source": {
+                    "name": "lightningBolt",
+                    "bypasses_armor": true,
+                    "unblockable": true
+                }
+            },
+            {
+                "type": "origins:execute_command",
+                "command": "power revoke @s cuprumite:railshock_damage"
+            }
+        ]
+    },
+    "execute_chosen_when_orb": false
+}

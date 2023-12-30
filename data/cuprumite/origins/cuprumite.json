@@ -1,0 +1,18 @@
+{
+    "name": "Cuprumite",
+    "description": "Arthropod-like in nature, Cuprumites use their control over copper to build vast networks of machinery.",
+    "icon": {
+        "item": "minecraft:raw_copper"
+    },
+    "impact": 2,
+    "order": 0,
+    "powers": [
+        "cuprumite:copper_control",
+        "cuprumite:railshock",
+        "cuprumite:energy_source",
+        "cuprumite:ettercap",
+        "cuprumite:recluse",
+        "cuprumite:sounds",
+        "cuprumite:mind_your_surroundings"
+    ]
+}

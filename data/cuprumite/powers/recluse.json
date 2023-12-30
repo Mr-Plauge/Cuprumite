@@ -1,0 +1,74 @@
+{
+    "type": "origins:multiple",
+    "name": "Recluse",
+    "description": "Brute force is not your strong suit. Attack range is reduced, health and armor are decreased, and you are susceptible to both projectile and explosion damage.",
+    "attribute_modifiers": {
+        "type": "origins:attribute",
+        "modifiers": [
+            {
+                "attribute": "reach-entity-attributes:attack_range",
+                "value": -1,
+                "operation": "addition"
+            },
+            {
+                "attribute": "minecraft:generic.armor",
+                "value": -6,
+                "operation": "addition"
+            },
+            {
+                "attribute": "minecraft:generic.max_health",
+                "value": -4,
+                "operation": "addition"
+            }
+        ]
+    },
+    "projectile_damage_increase": {
+        "type": "origins:modify_damage_taken",
+        "damage_condition": {
+            "type": "origins:projectile"
+        },
+        "modifier": {
+            "operation": "addition",
+            "value": 5
+        }
+    },
+    "explosion_damage_increase": {
+        "type": "origins:modify_damage_taken",
+        "damage_condition": {
+            "type": "origins:or",
+            "conditions": [
+                {
+                    "type": "origins:name",
+                    "name": "explosion.player"
+                },
+                {
+                    "type": "origins:name",
+                    "name": "explosion"
+                }
+            ]
+        },
+        "modifier": {
+            "operation": "addition",
+            "value": 15
+        }
+    },
+    "scale": {
+        "type": "origins:action_on_callback",
+        "entity_action_added": {
+            "type": "origins:delay",
+            "ticks": 1,
+            "action": {
+                "type": "origins:execute_command",
+                "command": "function cuprumite:scale"
+            }
+        },
+        "entity_action_lost": {
+            "type": "origins:execute_command",
+            "command": "scale reset @s"
+        }
+    },
+    "arthropod": {
+        "type": "origins:entity_group",
+        "group": "arthropod"
+    }
+}

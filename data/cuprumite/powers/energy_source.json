@@ -1,0 +1,67 @@
+{
+    "type": "origins:multiple",
+	"name": "Energy Source",
+	"description": "Your active abilities are tied to an energy bar with a size of 64 units. Copper Control and Railshock cost 1 and 20 units respectively. Energy recharges overtime.",
+    "bar": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 64,
+        "start_value": 64,
+        "hud_render": {
+            "should_render": true,
+            "sprite_location": "ancient:textures/gui/custom/mrplague/resource_bars/cuprumite.png",
+            "bar_index": 0,
+            "condition": {
+                "type": "origins:resource",
+                "resource": "cuprumite:energy_source_bar",
+                "comparison": "<",
+                "compare_to": 64
+            }
+        },
+        "min_action": {
+            "type": "origins:execute_command",
+            "command": "playsound ancient:cuprumite.pulse player @a ~ ~ ~ 0.5 2"
+        }
+    },
+    "recharge": {
+        "type": "origins:action_over_time",
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "cuprumite:energy_source_bar",
+            "change": 1
+        },
+        "interval": 20,
+        "condition": {
+            "type": "origins:resource",
+            "resource": "cuprumite:energy_source_bar",
+            "comparison": "<",
+            "compare_to": 64
+        }
+    },
+    "reset": {
+        "type": "origins:action_when_damage_taken",
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "cuprumite:energy_source_bar",
+            "change": 64,
+            "operation": "set"
+        },
+        "cooldown": 1,
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:health",
+                    "comparison": "<=",
+                    "compare_to": 0
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "cuprumite:energy_source_bar",
+                    "comparison": "<",
+                    "compare_to": 64
+                }
+            ]
+        }
+    }
+}

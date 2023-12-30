@@ -1,0 +1,30 @@
+{
+    "type": "origins:action_over_time",
+    "hidden": true,
+    "entity_action": {
+        "type": "origins:execute_command",
+        "command": "advancement grant @s only cuprumite:mind_your_surroundings"
+    },
+    "interval": 600,
+    "condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:block_in_radius",
+                "block_condition": {
+                    "type": "origins:block",
+                    "block": "minecraft:lightning_rod"
+                },
+                "radius": 5,
+                "shape": "cube",
+                "comparison": ">=",
+                "compare_to": 64
+            },
+            {
+                "type": "origins:advancement",
+                "advancement": "cuprumite:mind_your_surroundings",
+                "inverted": true
+            }
+        ]
+    }
+}

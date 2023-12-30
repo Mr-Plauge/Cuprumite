@@ -1,0 +1,315 @@
+{
+    "type": "origins:multiple",
+	"name": "Ettercap",
+	"description": "Your arachnid-like body allows you to run and jump on walls for a limited time. Hold forward while facing a wall to run across it, jump while adjacent to a wall to leap off of it. Press your quaternary ability key to relax, disabling wallrunning and walljumping.",
+    "wallrun": {
+        "type": "origins:active_self",
+        "entity_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:add_velocity",
+                    "y": -0.01,
+                    "space": "world",
+                    "set": true
+                },
+                {
+                    "type": "origins:add_velocity",
+                    "z": 0.8,
+                    "space": "local_horizontal"
+                },
+                {
+                    "type": "origins:change_resource",
+                    "resource": "cuprumite:ettercap_wallrun_duration",
+                    "change": -1
+                },
+                {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:block.grindstone.use",
+                    "volume": 1,
+                    "pitch": 2
+                }
+            ]
+        },
+        "cooldown": 1,
+        "hud_render": {
+            "should_render": false
+        },
+        "key": {
+            "key": "key.forward",
+            "continuous": true
+        },
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:raycast",
+                    "distance": 1,
+                    "block": true,
+                    "entity": false,
+                    "block_condition": {
+                        "type": "origins:movement_blocking"
+                    }
+                },
+                {
+                    "type": "origins:on_block",
+                    "inverted": true
+                },
+                {
+                    "type": "origins:food_level",
+                    "comparison": ">",
+                    "compare_to": 6
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "cuprumite:ettercap_wallrun_duration",
+                    "comparison": ">",
+                    "compare_to": 0
+                },
+                {    
+                    "type": "origins:fall_flying",
+                    "inverted": true
+                },
+                {         
+                    "type": "origins:creative_flying",
+                    "inverted": true
+                },
+                {
+                    "type": "origins:gamemode",
+                    "gamemode": "spectator",
+                    "inverted": true
+                },
+                {     
+                    "type": "origins:resource",
+                    "resource": "cuprumite:ettercap_toggle_bar",
+                    "comparison": "==",
+                    "compare_to": 1
+                }
+            ]
+        }
+    },
+    "wallrun_duration": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 20,
+        "start_value": 20,
+        "hud_render": {
+            "should_render": true,
+            "sprite_location": "ancient:textures/gui/custom/mrplague/resource_bars/cuprumite.png",
+            "bar_index": 1,
+            "condition": {
+                "type": "origins:resource",
+                "resource": "cuprumite:ettercap_wallrun_duration",
+                "comparison": "<",
+                "compare_to": 20
+            }
+        }
+    },
+    "wallrun_recharge": {
+        "type": "origins:action_over_time",
+        "entity_action": {
+            "type": "origins:change_resource",
+            "resource": "cuprumite:ettercap_wallrun_duration",
+            "change": 1
+        },
+        "interval": 1,
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:or",
+                    "conditions": [
+                        {     
+                            "type": "origins:on_block"
+                        },
+                        {
+                            "type": "origins:raycast",
+                            "distance": 1,
+                            "shape_type": "outline",
+                            "entity": false,
+                            "block_condition": {
+                                "type": "origins:movement_blocking"
+                            },
+                            "inverted": true
+                        }
+                    ]
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "cuprumite:ettercap_wallrun_duration",
+                    "comparison": "<",
+                    "compare_to": 20
+                }
+            ]
+        }
+    },
+    "walljump": {
+        "type": "origins:active_self",
+        "entity_action": {
+            "type": "origins:and",
+            "actions": [
+                {
+                    "type": "origins:add_velocity",
+                    "y": 0.3,
+                    "space": "world",
+                    "set": true
+                },
+                {
+                    "type": "origins:add_velocity",
+                    "z": 0.5,
+                    "space": "local"
+                },
+                {
+                    "type": "origins:change_resource",
+                    "resource": "cuprumite:ettercap_wallrun_duration",
+                    "change": -4
+                },
+                {
+                    "type": "origins:play_sound",
+                    "sound": "minecraft:entity.goat.long_jump",
+                    "volume": 1,
+                    "pitch": 2
+                }
+            ]
+        },
+        "cooldown": 10,
+        "hud_render": {
+            "should_render": false
+        },
+        "key": {
+            "key": "key.jump"
+        },
+        "condition": {
+            "type": "origins:and",
+            "conditions": [
+                {
+                    "type": "origins:or",
+                    "conditions": [
+                        {
+                            "type": "origins:in_block_anywhere",
+                            "block_condition": {
+                                "type": "origins:offset",
+                                "condition": {
+                                    "type": "origins:movement_blocking"
+                                },
+                                "x": 1
+                            }
+                        },
+                        {
+                            "type": "origins:in_block_anywhere",
+                            "block_condition": {
+                                "type": "origins:offset",
+                                "condition": {
+                                    "type": "origins:movement_blocking"
+                                },
+                                "x": -1
+                            }
+                        },
+                        {
+                            "type": "origins:in_block_anywhere",
+                            "block_condition": {
+                                "type": "origins:offset",
+                                "condition": {
+                                    "type": "origins:movement_blocking"
+                                },
+                                "z": 1
+                            }
+                        },
+                        {
+                            "type": "origins:in_block_anywhere",
+                            "block_condition": {
+                                "type": "origins:offset",
+                                "condition": {
+                                    "type": "origins:movement_blocking"
+                                },
+                                "z": -1
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "origins:on_block",
+                    "inverted": true
+                },
+                {
+                    "type": "origins:food_level",
+                    "comparison": ">",
+                    "compare_to": 6
+                },
+                {    
+                    "type": "origins:fall_flying",
+                    "inverted": true
+                },
+                {         
+                    "type": "origins:creative_flying",
+                    "inverted": true
+                },
+                {
+                    "type": "origins:gamemode",
+                    "gamemode": "spectator",
+                    "inverted": true
+                },
+                {
+                    "type": "origins:resource",
+                    "resource": "cuprumite:ettercap_wallrun_duration",
+                    "comparison": ">=",
+                    "compare_to": 4
+                },
+                {     
+                    "type": "origins:resource",
+                    "resource": "cuprumite:ettercap_toggle_bar",
+                    "comparison": "==",
+                    "compare_to": 1
+                }
+            ]
+        }
+    },
+    "toggle": {
+        "type": "origins:active_self",
+        "entity_action": {
+            "type": "origins:if_else",
+            "condition": {
+                "type": "origins:resource",
+                "resource": "cuprumite:ettercap_toggle_bar",
+                "comparison": "==",
+                "compare_to": 1
+            },
+            "if_action": {
+                "type": "origins:change_resource",
+                "resource": "cuprumite:ettercap_toggle_bar",
+                "change": 0,
+                "operation": "set"
+            },
+            "else_action": {
+                "type": "origins:change_resource",
+                "resource": "cuprumite:ettercap_toggle_bar",
+                "change": 1,
+                "operation": "set"
+            }
+        },
+        "cooldown": 1,
+        "key": {
+            "key": "key.origins.quaternary_active"
+        },
+        "hud_render": {
+            "should_render": false
+        }
+    },
+    "toggle_bar": {
+        "type": "origins:resource",
+        "min": 0,
+        "max": 1,
+        "start_value": 1,
+        "hud_render": {
+            "should_render": false
+        },
+        "min_action": {
+            "type": "origins:execute_command",
+            "command": "title @s actionbar {\"text\":\"Wallrunning and walljumping disabled\",\"color\":\"white\"}"
+        },
+        "max_action": {
+            "type": "origins:execute_command",
+            "command": "title @s actionbar {\"text\":\"Wallrunning and walljumping enabled\",\"color\":\"white\"}"
+        }
+    }
+}
